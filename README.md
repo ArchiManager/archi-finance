@@ -29,10 +29,6 @@ To get started with Archi Finance, follow these steps:
 
 We welcome contributions from the community! If you have any ideas, bug fixes, or improvements, feel free to open an issue or submit a pull request.
 
-## License 📝
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
 ## Contact Us 📧
 
 If you have any questions or feedback, please email us at hello@example.com or join our Discord community: [link to Discord].
