@@ -30,7 +30,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
                 {(renderDashboardLayout()) ? (
                     <DashboardLayout>{children}</DashboardLayout>
                 ) : (
-                    children
+                    <>{children}</>
                 )}
             </NextSnackbarProvider>
         </StoreProvider>

@@ -17,25 +17,27 @@ interface ArchiCardProps {
         width?: string;
     };
     children?: React.ReactNode;
+    ripple?: boolean;
 }
+
+export const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+}));
 
 export default function ArchiCard({
     className,
     coverImage,
-    children
+    children,
+    ripple = true
 }: ArchiCardProps) {
-
-    const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-        ...theme.typography.body2,
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    }));
 
     return (
         <Card className={className}>
-            <Item>
-                <CardActionArea>
+            <CardActionArea>
+                <Item>
                     {(coverImage) && (
                         <CardMedia
                             component="img"
@@ -48,8 +50,8 @@ export default function ArchiCard({
                     <CardContent>
                         {children}
                     </CardContent>
-                </CardActionArea>
-            </Item>
+                </Item>
+            </CardActionArea>
         </Card>
     );
 }

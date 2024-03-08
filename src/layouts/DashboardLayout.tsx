@@ -1,5 +1,5 @@
 "use client";
-import * as React from 'react';
+import { useState } from 'react';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -69,10 +69,10 @@ export default function DashboardLayout({
 ) {
   const theme = useTheme();
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setOpen(!open);
   };
 
   const handleDrawerClose = () => {
@@ -81,7 +81,6 @@ export default function DashboardLayout({
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
       <Navbar
         open={open}
         handleDrawerOpen={handleDrawerOpen}

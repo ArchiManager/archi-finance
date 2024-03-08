@@ -1,5 +1,5 @@
-import ArchiCard from '@/components/base/ArchiCard';
-import { Typography } from '@mui/material';
+import ArchiCard, { Item } from '@/components/base/ArchiCard';
+import { Box, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 
 interface DashboardBodyProps {
@@ -11,45 +11,96 @@ const DashboardBody = ({
 }: DashboardBodyProps) => {
     return (
         <div className={`${className}`}>
-            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={6}>
+            <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2 }} columnSpacing={{ xs: 1, sm: 1, md: 2 }}>
+                <Grid item xs={4}>
+                    <Item>
+                        <Box className='w-full p-4'>
+                            <Typography gutterBottom variant="h5" component="div" className='text-green-500'>
+                                Due Amounts
+                            </Typography>
+                            <div className="flex flex-row gap-4">
+                                <ArchiCard className='w-6/12 border-blue-600 border-solid border'>
+                                    <Typography gutterBottom variant="h6" component="div">
+                                        Receivable
+                                    </Typography>
+                                    <Typography className='text-5xl text-blue-600'>
+                                        11010
+                                    </Typography>
+                                </ArchiCard>
+                                <ArchiCard className='w-6/12 border-red-500 border-solid border'>
+                                    <Typography gutterBottom variant="h6" component="div">
+                                        Payable
+                                    </Typography>
+                                    <Typography className='text-5xl text-red-500'>
+                                        12111
+                                    </Typography>
+                                </ArchiCard>
+                            </div>
+                        </Box>
+                    </Item>
+                </Grid>
+                <Grid item xs={2}>
                     <ArchiCard className='w-full'>
-                        <Typography gutterBottom variant="h5" component="div">
-                            Top Left Card
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Architect is a free and open-source tool for creating, maintaining, and sharing secure enterprise architecture diagrams. It is a cloud-based solution that allows users to create and edit diagrams from any device, anywhere, and at any time. Architect is designed to be easy to use, with an intuitive interface that makes it simple to create professional-looking diagrams. It also includes a range of features that make it easy to collaborate with others, including real-time editing, comments, and version history. Architect is built on a secure and scalable platform, with robust security features that protect your data and ensure that it is always available when you need it. Architect is designed to be flexible, with a range of pricing plans to suit different needs and budgets. Whether you are a small business or a large enterprise, Architect has a plan that is right for you. Try Architect today and see how it can help you create, maintain, and share secure enterprise architecture diagrams.
-                        </Typography>
+                        <div className='h-40 flex flex-col justify-start items-center'>
+                            <Typography gutterBottom variant="h6" component="div">
+                                Office Expense
+                            </Typography>
+                            <div className='flex flex-col justify-center items-center h-full mt-0'>
+                                <Typography className='text-5xl text-black'>
+                                    11010
+                                </Typography>
+                                <Box className="mt-4">
+                                    <Typography variant="body2" color="text.secondary">
+                                        <span className='text-green-500'>+ 10%</span> than last month
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        <span className='text-red-500'>- 10%</span> than last month
+                                    </Typography>
+                                </Box>
+                            </div>
+                        </div>
                     </ArchiCard>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={2}>
                     <ArchiCard>
-                        <Typography gutterBottom variant="h5" component="div">
-                            Top Right Card
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Architect is a free and open-source tool for creating, maintaining, and sharing secure enterprise architecture diagrams. It is a cloud-based solution that allows users to create and edit diagrams from any device, anywhere, and at any time. Architect is designed to be easy to use, with an intuitive interface that makes it simple to create professional-looking diagrams. It also includes a range of features that make it easy to collaborate with others, including real-time editing, comments, and version history. Architect is built on a secure and scalable platform, with robust security features that protect your data and ensure that it is always available when you need it. Architect is designed to be flexible, with a range of pricing plans to suit different needs and budgets. Whether you are a small business or a large enterprise, Architect has a plan that is right for you. Try Architect today and see how it can help you create, maintain, and share secure enterprise architecture diagrams.
-                        </Typography>
+                        <div className='h-40 flex flex-col justify-start items-center'>
+                            <Typography gutterBottom variant="h6" component="div">
+                                Received
+                            </Typography>
+                            <div className='flex flex-col justify-center items-center h-full'>
+                                <Typography className='text-5xl text-black'>
+                                    11010
+                                </Typography>
+                            </div>
+                        </div>
                     </ArchiCard>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={2}>
                     <ArchiCard>
-                        <Typography gutterBottom variant="h5" component="div">
-                            Bottom Left Card
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Architect is a free and open-source tool for creating, maintaining, and sharing secure enterprise architecture diagrams. It is a cloud-based solution that allows users to create and edit diagrams from any device, anywhere, and at any time. Architect is designed to be easy to use, with an intuitive interface that makes it simple to create professional-looking diagrams. It also includes a range of features that make it easy to collaborate with others, including real-time editing, comments, and version history. Architect is built on a secure and scalable platform, with robust security features that protect your data and ensure that it is always available when you need it. Architect is designed to be flexible, with a range of pricing plans to suit different needs and budgets. Whether you are a small business or a large enterprise, Architect has a plan that is right for you. Try Architect today and see how it can help you create, maintain, and share secure enterprise architecture diagrams.
-                        </Typography>
+                        <div className='h-40 flex flex-col justify-start items-center'>
+                            <Typography gutterBottom variant="h6" component="div">
+                                Expense
+                            </Typography>
+                            <div className='flex flex-col justify-center items-center h-full'>
+                                <Typography className='text-5xl text-black'>
+                                    13210
+                                </Typography>
+                            </div>
+                        </div>
                     </ArchiCard>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={2}>
                     <ArchiCard>
-                        <Typography gutterBottom variant="h5" component="div">
-                            Bottom Right Card
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Architect is a free and open-source tool for creating, maintaining, and sharing secure enterprise architecture diagrams. It is a cloud-based solution that allows users to create and edit diagrams from any device, anywhere, and at any time. Architect is designed to be easy to use, with an intuitive interface that makes it simple to create professional-looking diagrams. It also includes a range of features that make it easy to collaborate with others, including real-time editing, comments, and version history. Architect is built on a secure and scalable platform, with robust security features that protect your data and ensure that it is always available when you need it. Architect is designed to be flexible, with a range of pricing plans to suit different needs and budgets. Whether you are a small business or a large enterprise, Architect has a plan that is right for you. Try Architect today and see how it can help you create, maintain, and share secure enterprise architecture diagrams.
-                        </Typography>
+                        <div className='h-40 flex flex-col justify-start items-center'>
+                            <Typography gutterBottom variant="h6" component="div" className='text-orange-400'>
+                                Net Profit
+                            </Typography>
+                            <div className='flex flex-col justify-center items-center h-full'>
+                                <Typography className='text-5xl text-orange-400'>
+                                    12478
+                                </Typography>
+                            </div>
+                        </div>
                     </ArchiCard>
                 </Grid>
             </Grid>
