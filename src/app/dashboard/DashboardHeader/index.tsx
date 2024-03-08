@@ -23,14 +23,14 @@ const DashboardHeader = () => {
 
                 <ArchiButton
                     text="ARICS"
-                    variant="outlined"
+                    variant="contained"
                     customStyles={true}
                     className="rounded-2xl text-base bg-white text-indigo-800 hover:bg-gray-200 focus:ring-indigo-900"
                 />
 
                 <ArchiButton
                     text="All Summary"
-                    variant="outlined"
+                    variant="contained"
                     customStyles={true}
                     className="rounded-2xl text-base bg-white text-indigo-800 hover:bg-gray-200 focus:ring-indigo-900"
                 />
