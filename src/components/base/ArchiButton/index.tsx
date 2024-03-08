@@ -11,7 +11,7 @@ interface ButtonProps {
   customStyles?: boolean;
 }
 
-const Button = (props: ButtonProps) => {
+const ArchiButton = (props: ButtonProps) => {
   const {
     type,
     text,
@@ -19,7 +19,7 @@ const Button = (props: ButtonProps) => {
     onClick,
     variant = "contained",
     className,
-    fullWidth = true,
+    fullWidth = false,
     customStyles = false
   } = props;
   return (
@@ -41,4 +41,4 @@ const Button = (props: ButtonProps) => {
     </BaseButton >
   );
 };
-export default Button;
+export default ArchiButton;

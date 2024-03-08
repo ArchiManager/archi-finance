@@ -1,8 +1,7 @@
 "use client";
 import * as React from 'react';
-import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Badge, Button, Menu, MenuItem } from "@mui/material";
@@ -13,12 +12,10 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import MoreIcon from "@mui/icons-material/MoreVert";
+import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MailIcon from '@mui/icons-material/Mail';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { signOut } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useRouter } from 'next/navigation';
 import { useSnackbar } from 'notistack';
@@ -26,6 +23,7 @@ import Image from 'next/image';
 import { drawerWidth } from '@/components/common/Sidebar/data';
 import { useEffect } from 'react';
 import { logout } from '@/utils/methods/auth';
+import ArchiInput from '@/components/base/ArchiInput';
 
 interface NavbarProps {
     open?: boolean;
@@ -218,7 +216,7 @@ const Navbar = (props: NavbarProps) => {
     );
 
     return (
-        <AppBar position="fixed" open={open} variant='elevation' color='transparent'>
+        <AppBar position="fixed" open={open} variant='elevation' className='bg-indigo-800'>
             <Toolbar>
                 <IconButton
                     color="inherit"
@@ -240,12 +238,37 @@ const Navbar = (props: NavbarProps) => {
                         height={35}
                         loading="lazy"
                     />
-                    <Typography variant="h6" noWrap component="div" className="text-indigo-800 ml-4">
+                    <Typography variant="h6" noWrap component="div" className="ml-4">
                         Arics Finance
                     </Typography>
                 </Box>
                 <Box sx={{ flexGrow: 1 }} />
                 <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                    <div className='h-16 flex flex-col justify-center mr-4'>
+                        <ArchiInput
+                            id={`searchInput${Math.random()}`}
+                            type="text"
+                            placeholder='Search for projects or people or tasks...'
+                            customStyles={true}
+                            disableUnderline={true}
+                            className='rounded-sm border border-white border-solid hover:border-white focus:border-blue-400 focus:border-2 bg-transparent'
+                            inputclassName='w-96 text-white'
+                            variant={"filled"}
+                            icon={
+                                <SearchIcon
+                                    sx={{
+                                        color: "white",
+                                        marginTop: "0px",
+                                    }}
+                                />
+                            }
+                            sxInput={{
+                                padding: "8px",
+                                fontSize: "18px",
+                                color: "white"
+                            }}
+                        />
+                    </div>
                     <IconButton
                         size="large"
                         aria-label="show 4 new mails"
@@ -264,28 +287,44 @@ const Navbar = (props: NavbarProps) => {
                             <NotificationsIcon />
                         </Badge>
                     </IconButton>
-                    <IconButton
-                        size="large"
-                        edge="end"
-                        aria-label="account of current user"
-                        aria-controls={menuId}
-                        aria-haspopup="true"
-                        onClick={handleProfileMenuOpen}
-                        color="inherit"
-                    >
-                        {user ? (
-                            <Image
-                                src={user?.photoURL as string}
-                                alt="profile"
-                                width={30}
-                                height={30}
-                                className="rounded-full border-2 border-white border-solid"
-                                loading="lazy"
-                            />
-                        ) : (
-                            <AccountCircle />
-                        )}
-                    </IconButton>
+                    <Box className="flex flex-row">
+                        <div className='h-full flex flex-col justify-center items-end ml-4 mr-2'>
+                            {loadingAuth ? (
+                                <p className="text-sm text-gray-300 p-0">
+                                    Loading...
+                                </p>
+                            ) : (
+                                <h4 className="text-md my-0 p-0">
+                                    {user?.displayName}
+                                </h4>
+                            )}
+                            <p className="text-sm text-gray-300 m-0 p-0 text-left">
+                                PK
+                            </p>
+                        </div>
+                        <IconButton
+                            size="large"
+                            edge="end"
+                            aria-label="account of current user"
+                            aria-controls={menuId}
+                            aria-haspopup="true"
+                            onClick={handleProfileMenuOpen}
+                            color="inherit"
+                        >
+                            {user ? (
+                                <Image
+                                    src={user?.photoURL as string}
+                                    alt="profile"
+                                    width={35}
+                                    height={35}
+                                    className="rounded-full border-2 border-white border-solid"
+                                    loading="lazy"
+                                />
+                            ) : (
+                                <AccountCircle />
+                            )}
+                        </IconButton>
+                    </Box>
                 </Box>
                 <Box sx={{ display: { xs: "flex", md: "none" } }}>
                     <IconButton
