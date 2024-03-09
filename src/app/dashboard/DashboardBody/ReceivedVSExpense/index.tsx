@@ -6,7 +6,7 @@ import { Typography } from "@mui/material";
 import { useState } from "react";
 import { receivedVSExpenseData } from "../data/chartsData/receivedVSExpenseData";
 
-const ReceivedExpense = () => {
+const ReceivedVSExpense = () => {
     const [dropDownLineChartFilter, setDropDownLineChartFilter] = useState<LineChartFilter>(LineChartFilter.WEEKLY);
 
     return (
@@ -35,4 +35,4 @@ const ReceivedExpense = () => {
         </div>
     )
 }
-export default ReceivedExpense;
+export default ReceivedVSExpense;
