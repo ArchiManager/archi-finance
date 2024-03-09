@@ -1,6 +1,7 @@
 import ArchiCard, { Item } from '@/components/base/ArchiCard';
 import { Box, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import ReceivedExpense from './ReceivedExpense';
 
 interface DashboardBodyProps {
     className?: string;
@@ -9,6 +10,7 @@ interface DashboardBodyProps {
 const DashboardBody = ({
     className
 }: DashboardBodyProps) => {
+
     return (
         <div className={`${className}`}>
             <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2 }} columnSpacing={{ xs: 1, sm: 1, md: 2 }}>
@@ -102,6 +104,14 @@ const DashboardBody = ({
                             </div>
                         </div>
                     </ArchiCard>
+                </Grid>
+
+                <Grid item xs={6}>
+                    <Item>
+                        <Box className='w-full p-4'>
+                            <ReceivedExpense />
+                        </Box>
+                    </Item>
                 </Grid>
             </Grid>
         </div>

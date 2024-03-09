@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { auth } from "@/firebase";
 import { Button, TextField } from "@mui/material";
+import { auth } from "@/firebase";
 import {
     GoogleAuthProvider,
     signInWithEmailAndPassword,
