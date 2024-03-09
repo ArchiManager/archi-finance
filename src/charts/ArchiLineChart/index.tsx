@@ -65,24 +65,6 @@ function ArchiLineChart({
         <YAxis />
         <Tooltip />
         <Legend />
-        {/*         <Line type="monotone" dataKey="pv" stroke="#8884d8">
-          <LabelList content={<CustomizedLabel />} />
-        </Line>
-        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-        <Line type="monotone" dataKey="amt" stroke="#ffc658" /> */}
-
-        {/*         {
-          Object.keys(data[0]).map((key, index) => {
-            if (key !== 'name') {
-              return (
-                <Line key={index} type="monotone" dataKey={key} stroke="#8884d8">
-                  <LabelList content={<CustomizedLabel />} />
-                </Line>
-              );
-            }
-          })
-        } */}
-
         {
           dataKeysReceivedVSExpense.map((line, index) => {
             return (

@@ -6,6 +6,7 @@ import DueAmounts from './DueAmounts';
 import OfficeExpense from './OfficeExpense';
 import ExpenseCard from './ExpenseCard';
 import FundsInsightCard from './FundsInsightCard';
+import ExpenseReport from './ExpenseReport';
 
 interface DashboardBodyProps {
     className?: string;
@@ -54,14 +55,46 @@ const DashboardBody = ({
 
                 <Grid item sm={3} xs={12}>
                     <Box className='w-full'>
-                        <FundsInsightCard type="Cash Balance" />
+                        <FundsInsightCard
+                            type="Cash Balance"
+                            data={
+                                {
+                                    cashBalance: 14533,
+                                    expectedProfit: 16554,
+                                    totalReceivable: 11010,
+                                    totalPayable: 12111,
+                                    cashIn: 11010,
+                                    cashOut: 12111
+                                }
+                            }
+                        />
                     </Box>
                 </Grid>
 
                 <Grid item sm={3} xs={12}>
                     <Box className='w-full'>
-                        <FundsInsightCard type="Expected Profit" />
+                        <FundsInsightCard
+                            type="Expected Profit"
+                            data={
+                                {
+                                    cashBalance: 14533,
+                                    expectedProfit: 16554,
+                                    totalReceivable: 11010,
+                                    totalPayable: 12111,
+                                    cashIn: 11010,
+                                    cashOut: 12111
+                                }
+                            }
+                        />
                     </Box>
+                </Grid>
+
+                <Grid item sm={6} xs={12}>
+                    <Item>
+                        <Box className='w-full p-4'>
+                            <ExpenseReport />
+                        </Box>
+                    </Item>
                 </Grid>
             </Grid>
         </div>

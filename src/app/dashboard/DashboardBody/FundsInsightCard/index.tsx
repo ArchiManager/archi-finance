@@ -8,7 +8,7 @@ interface FundsInsightCardData {
     cashBalance: number;
     expectedProfit: number;
     totalReceivable: number;
-    payable: number;
+    totalPayable: number;
     cashIn: number;
     cashOut: number;
 }
@@ -19,8 +19,11 @@ interface FundsInsightCardProps {
 }
 
 const FundsInsightCard = ({
-    type
+    type,
+    data
 }: FundsInsightCardProps) => {
+    const { cashBalance, expectedProfit, totalReceivable, totalPayable, cashIn, cashOut } = data;
+
     return (
         <Item className="border border-gray-300 border-solid rounded-md h-full w-full">
             <Box className='w-full p-4'>
@@ -33,7 +36,7 @@ const FundsInsightCard = ({
                             Pkr
                         </span>
                         {" "}
-                        12,111
+                        {(type === "Cash Balance") ? (cashBalance) : (expectedProfit)}
                     </Typography>
                 </Box>
                 <div className="flex flex-col gap-4">
@@ -42,7 +45,7 @@ const FundsInsightCard = ({
                             {type === "Cash Balance" ? "Cash In" : "Total Receivable"}
                         </Typography>
                         <Typography className={`text-5xl mt-3 ${type === "Cash Balance" ? "text-green-500" : "text-blue-600"}`}>
-                            11010
+                            {type === "Cash Balance" ? cashIn : totalReceivable}
                         </Typography>
                     </ArchiCard>
                     <ArchiCard className='w-full border-red-500 border-solid border'>
@@ -50,7 +53,7 @@ const FundsInsightCard = ({
                             {type === "Cash Balance" ? "Cash Out" : "Total Payable"}
                         </Typography>
                         <Typography className='text-5xl text-red-500'>
-                            12111
+                            {type === "Cash Balance" ? cashOut : totalPayable}
                         </Typography>
                     </ArchiCard>
                 </div>
