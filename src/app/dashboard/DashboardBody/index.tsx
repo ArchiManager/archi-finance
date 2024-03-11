@@ -7,6 +7,7 @@ import OfficeExpense from './OfficeExpense';
 import ExpenseCard from './ExpenseCard';
 import FundsInsightCard from './FundsInsightCard';
 import ExpenseReport from './ExpenseReport';
+import InflowVSOutflow from './InflowVSOutflow';
 
 interface DashboardBodyProps {
     className?: string;
@@ -64,7 +65,10 @@ const DashboardBody = ({
                                     totalReceivable: 11010,
                                     totalPayable: 12111,
                                     cashIn: 11010,
-                                    cashOut: 12111
+                                    cashOut: 12111,
+                                    loanPayable: 11010,
+                                    loanPaid: 11010,
+                                    loanReceived: 12111
                                 }
                             }
                         />
@@ -82,19 +86,51 @@ const DashboardBody = ({
                                     totalReceivable: 11010,
                                     totalPayable: 12111,
                                     cashIn: 11010,
-                                    cashOut: 12111
+                                    cashOut: 12111,
+                                    loanPayable: 11010,
+                                    loanPaid: 11010,
+                                    loanReceived: 12111
                                 }
                             }
                         />
                     </Box>
                 </Grid>
 
-                <Grid item sm={6} xs={12}>
+                <Grid item sm={4} xs={12}>
+                    <Item>
+                        <Box className='w-full p-4'>
+                            <InflowVSOutflow />
+                        </Box>
+                    </Item>
+                </Grid>
+
+                <Grid item sm={4} xs={12}>
                     <Item>
                         <Box className='w-full p-4'>
                             <ExpenseReport />
                         </Box>
                     </Item>
+                </Grid>
+
+                <Grid item sm={4} xs={12}>
+                    <Box className='w-full'>
+                        <FundsInsightCard
+                            type="Loan Payable"
+                            data={
+                                {
+                                    cashBalance: 14533,
+                                    expectedProfit: 16554,
+                                    totalReceivable: 11010,
+                                    totalPayable: 12111,
+                                    cashIn: 11010,
+                                    cashOut: 12111,
+                                    loanPayable: 11010,
+                                    loanPaid: 11010,
+                                    loanReceived: 324234
+                                }
+                            }
+                        />
+                    </Box>
                 </Grid>
             </Grid>
         </div>

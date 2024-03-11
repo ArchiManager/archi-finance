@@ -1,118 +1,71 @@
-"use client";
 import React, { useCallback, useState } from "react";
-import { PieChart, Pie, Sector, Cell } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 const data = [
-    { name: "Group A", value: 400, color: "#8884d8" },
-    { name: "Group B", value: 300, color: "#83a6ed" },
-    { name: "Group C", value: 300, color: "#8dd1e1" },
-    { name: "Group D", value: 200, color: "#82ca9d" },
+    { name: "Group A", value: 400 },
+    { name: "Group B", value: 300 },
+    { name: "Group C", value: 300 },
+    { name: "Group D", value: 200 }
 ];
 
-const renderActiveShape = (props: any) => {
-    const RADIAN = Math.PI / 180;
-    const {
-        cx,
-        cy,
-        midAngle,
-        innerRadius,
-        outerRadius,
-        startAngle,
-        endAngle,
-        fill,
-        payload,
-        percent,
-        value,
-    } = props;
-    const sin = Math.sin(-RADIAN * midAngle);
-    const cos = Math.cos(-RADIAN * midAngle);
-    const sx = cx + (outerRadius + 10) * cos;
-    const sy = cy + (outerRadius + 10) * sin;
-    const mx = cx + (outerRadius + 30) * cos;
-    const my = cy + (outerRadius + 30) * sin;
-    const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-    const ey = my;
-    const textAnchor = cos >= 0 ? "start" : "end";
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+    index
+}: any) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
     return (
-        <g>
-            <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-                {payload.name}
-            </text>
-            <Sector
-                cx={cx}
-                cy={cy}
-                innerRadius={innerRadius}
-                outerRadius={outerRadius}
-                startAngle={startAngle}
-                endAngle={endAngle}
-                fill={fill}
-            />
-            <Sector
-                cx={cx}
-                cy={cy}
-                startAngle={startAngle}
-                endAngle={endAngle}
-                innerRadius={outerRadius + 6}
-                outerRadius={outerRadius + 10}
-                fill={fill}
-            />
-            <path
-                d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
-                stroke={fill}
-                fill="none"
-            />
-            <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-            <text
-                x={ex + (cos >= 0 ? 1 : -1) * 12}
-                y={ey}
-                textAnchor={textAnchor}
-                fill="#333"
-            >{`PV ${value}`}</text>
-            <text
-                x={ex + (cos >= 0 ? 1 : -1) * 12}
-                y={ey}
-                dy={18}
-                textAnchor={textAnchor}
-                fill="#999"
+        <text
+            x={x}
+            y={y}
+            fill="white"
+            textAnchor={x > cx ? "start" : "end"}
+            dominantBaseline="central"
+        >
+            <tspan
+                x={x}
+                dy={
+                    (percent * 100).toFixed(0) === '100' ? '0.5em' : (percent * 100).toFixed(0) === '0' ? '-0.5em' : '0em'
+                }
             >
-                {`(Rate ${(percent * 100).toFixed(2)}%)`}
-            </text>
-        </g>
+                {`${(percent * 100).toFixed(0)}%`}
+            </tspan>
+            <tspan x={x} dy="1.5em">
+                {data[index].name}
+            </tspan>
+        </text>
     );
 };
 
-function ArchiPieChart() {
-    const [activeIndex, setActiveIndex] = useState(0);
-    const onPieEnter = useCallback(
-        (_: any, index: number) => {
-            setActiveIndex(index);
-        },
-        [setActiveIndex]
-    );
-
+export default function ArchiPieChart() {
     return (
-        /*  <PieChart width={400} height={400}>
-             <Pie
-                 activeIndex={activeIndex}
-                 activeShape={renderActiveShape}
-                 data={data}
-                 cx={200}
-                 cy={200}
-                 innerRadius={60}
-                 outerRadius={80}
-                 fill="#8884d8"
-                 dataKey="value"
-                 onMouseEnter={onPieEnter}
-             >
-                 {data.map((entry, index) => (
-                     <Cell key={`cell-${index}`} fill={entry.color} />
-                 ))}
-             </Pie>
-         </PieChart> */
-        <div>
-            <h1>ArchiPieChart</h1>
-        </div>
+        <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+                <Pie
+                    data={data}
+                    cx={200}
+                    cy={200}
+                    labelLine={false}
+                    label={renderCustomizedLabel}
+                    outerRadius={150}
+                    fill="#8884d8"
+                    dataKey="value"
+                >
+                    {data.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                </Pie>
+            </PieChart>
+        </ResponsiveContainer>
     );
 }
-export default ArchiPieChart;
