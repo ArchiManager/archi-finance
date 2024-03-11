@@ -246,7 +246,7 @@ const Navbar = (props: NavbarProps) => {
                 <Box sx={{ display: { xs: "none", md: "flex" } }}>
                     <div className='h-16 flex flex-col justify-center mr-4'>
                         <ArchiInput
-                            id={`searchInput${Math.random()}`}
+                            id="searchInputNavbar"
                             type="text"
                             placeholder='Search for projects or people or tasks...'
                             customStyles={true}

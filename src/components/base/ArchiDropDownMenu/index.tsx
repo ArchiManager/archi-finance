@@ -68,8 +68,8 @@ function ArchiDropDownMenu({
         handleClose();
     }
 
-    let dropdownButtonId = `ArchiDropDownButton${Math.random()}`;
-    let dropdownMenuId = `ArchiDropDownMenu${Math.random()}`;
+    let dropdownButtonId = `ArchiDropDownButtonMenu`;
+    let dropdownMenuId = `ArchiDropDownMenu`;
 
     return (
         <div>
