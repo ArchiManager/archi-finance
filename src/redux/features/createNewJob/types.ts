@@ -1,4 +1,3 @@
-import { ControlledRadioButtonsGroupOptionsType } from "@components/base/ControlledRadioButtonsGroup/types";
 
 export interface JobAttachment {
     id: number;
@@ -10,9 +9,9 @@ export interface JobState {
     id: number;
     title: string;
     skills: string[];
-    scope: ControlledRadioButtonsGroupOptionsType;
-    duration: ControlledRadioButtonsGroupOptionsType;
-    experience: ControlledRadioButtonsGroupOptionsType;
+    scope: string;
+    duration: number;
+    experience: number;
     isContractToHire: boolean;
     hourlyRate: {
         min: number;

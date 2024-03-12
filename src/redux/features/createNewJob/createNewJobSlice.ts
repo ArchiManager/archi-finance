@@ -6,9 +6,9 @@ const initialState: JobState = {
     id: 1,
     title: '',
     skills: [],
-    scope: [],
-    duration: [],
-    experience: [],
+    scope: "",
+    duration: 0,
+    experience: 0,
     isContractToHire: false,
     hourlyRate: {
         min: 0,

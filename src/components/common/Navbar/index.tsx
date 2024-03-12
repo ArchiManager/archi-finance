@@ -1,14 +1,13 @@
 "use client";
 import * as React from 'react';
+import { useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Badge, Button, Menu, MenuItem } from "@mui/material";
+import { Badge, Menu, MenuItem } from "@mui/material";
 import Toolbar from '@mui/material/Toolbar';
-import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import MoreIcon from "@mui/icons-material/MoreVert";
@@ -21,7 +20,6 @@ import { useRouter } from 'next/navigation';
 import { useSnackbar } from 'notistack';
 import Image from 'next/image';
 import { drawerWidth } from '@/components/common/Sidebar/data';
-import { useEffect } from 'react';
 import { logout } from '@/utils/methods/auth';
 import ArchiInput from '@/components/base/ArchiInput';
 
@@ -47,7 +45,8 @@ const Navbar = (props: NavbarProps) => {
         }),
         ...(open && {
             marginLeft: drawerWidth,
-            width: `calc(100% - ${drawerWidth}px)`,
+            /*   width: `calc(100% - ${drawerWidth}px)`, */
+            width: "100%",
             transition: theme.transitions.create(['width', 'margin'], {
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.enteringScreen,
@@ -225,7 +224,7 @@ const Navbar = (props: NavbarProps) => {
                     edge="start"
                     sx={{
                         marginRight: 5,
-                        ...(open && { display: 'none' }),
+                        /*  ...(open && { display: 'none' }), */
                     }}
                 >
                     <MenuIcon />
