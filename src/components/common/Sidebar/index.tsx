@@ -58,7 +58,7 @@ const Sidebar = ({
                                     justifyContent: 'center',
                                 }}
                             >
-                                <item.icon className="text-indigo-800" />
+                                <item.icon className="text-primary" />
                             </ListItemIcon>
                             <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0, fontWeight: "bold" }} />
                         </ListItemButton>
