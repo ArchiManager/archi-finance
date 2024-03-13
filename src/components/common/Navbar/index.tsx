@@ -22,7 +22,6 @@ import Image from 'next/image';
 import { drawerWidth } from '@/components/common/Sidebar/data';
 import { logout } from '@/utils/methods/auth';
 import ArchiInput from '@/components/base/ArchiInput';
-import NavLogo from './NavLogo';
 
 interface NavbarProps {
     open: boolean;
@@ -46,8 +45,8 @@ const Navbar = (props: NavbarProps) => {
         }),
         ...(open && {
             marginLeft: drawerWidth,
-            width: `calc(100% - ${drawerWidth}px)`,
-            /* width: "100%", */
+            /*   width: `calc(100% - ${drawerWidth}px)`, */
+            width: "100%",
             transition: theme.transitions.create(['width', 'margin'], {
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.enteringScreen,
@@ -216,7 +215,7 @@ const Navbar = (props: NavbarProps) => {
     );
 
     return (
-        <AppBar position="fixed" open={open} variant='outlined' className='bg-primary'>
+        <AppBar position="fixed" open={open} variant='elevation' className='bg-indigo-800'>
             <Toolbar>
                 <IconButton
                     color="inherit"
@@ -225,17 +224,26 @@ const Navbar = (props: NavbarProps) => {
                     edge="start"
                     sx={{
                         marginRight: 5,
-                        ...(open && { display: 'none' }),
+                        /*  ...(open && { display: 'none' }), */
                     }}
                 >
                     <MenuIcon />
                 </IconButton>
-                <div>
-                    <NavLogo />
-                </div>
+                <Box className="flex">
+                    <Image
+                        src="/images/logo.png"
+                        alt="logo"
+                        width={35}
+                        height={35}
+                        loading="lazy"
+                    />
+                    <Typography variant="h6" noWrap component="div" className="ml-4">
+                        Arics Finance
+                    </Typography>
+                </Box>
                 <Box sx={{ flexGrow: 1 }} />
                 <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                    <div className={`h-16 ${!open ? ("flex") : "hidden"} flex-col justify-center mr-4`}>
+                    <div className='h-16 flex flex-col justify-center mr-4'>
                         <ArchiInput
                             id="searchInputNavbar"
                             type="text"

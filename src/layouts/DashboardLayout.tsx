@@ -80,8 +80,8 @@ export default function DashboardLayout({
   };
 
   return (
-    <div className="flex bg-gray-300 min-h-screen border border-solid border-red-500">
-      < Navbar
+    <Box sx={{ display: 'flex' }}>
+      <Navbar
         open={open}
         handleDrawerOpen={handleDrawerOpen}
       />
@@ -102,6 +102,6 @@ export default function DashboardLayout({
         <DrawerHeader />
         {children}
       </Box>
-    </div>
+    </Box>
   );
 }

@@ -26,7 +26,6 @@ export default function Home() {
         // alert("User is already Signed In" + user.email);
         // do something with the user
         console.log("User ==> ", user);
-        router.push("/dashboard");
       } else {
         console.log("user is null");
         /*    router.push("/login"); */
