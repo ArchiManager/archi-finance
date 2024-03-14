@@ -53,10 +53,49 @@ function CreateProjectPage() {
                         type="text"
                         className="m-0"
                     />
-
                 </div>
-            </div >
-        </div >
+
+                <div className="w-full">
+                    <ArchiInput
+                        step={4}
+                        id="clientName"
+                        placeholder="Please enter client name (required)"
+                        required
+                        fullWidth={true}
+                        label="Client Name"
+                        variant="outlined"
+                        className="my-0 mt-3"
+                    />
+                </div>
+
+                <div className="w-full">
+                    <ArchiInput
+                        step={5}
+                        id="projectCode"
+                        placeholder="Please enter project code (required)"
+                        required
+                        fullWidth={true}
+                        label="Project Code"
+                        variant="outlined"
+                        className="my-0 mt-3"
+                        type={"number"}
+                    />
+                </div>
+
+                <div className="w-full">
+                    <ArchiInput
+                        step={5}
+                        id="projectCode"
+                        placeholder="Please enter project code (required)"
+                        required
+                        fullWidth={true}
+                        label="Project Code"
+                        variant="outlined"
+                        className="my-0 mt-3"
+                    />
+                </div>
+            </div>
+        </div>
     );
 }
 export default CreateProjectPage;
