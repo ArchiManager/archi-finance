@@ -19,6 +19,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
             "/dashboard/invoices",
             "/dashboard/expenses",
             "/dashboard/reports",
+            "/create/project"
         ];
 
         return dashboardPaths.includes(pathname);
