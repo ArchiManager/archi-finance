@@ -50,6 +50,7 @@ const Sidebar = ({
                                 justifyContent: open ? 'initial' : 'center',
                                 px: 2.5,
                             }}
+                            onClick={() => router.push(item.link)}
                         >
                             <ListItemIcon
                                 sx={{
