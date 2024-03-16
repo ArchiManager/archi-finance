@@ -18,10 +18,11 @@ import {
   GridColDef,
   GridToolbarContainer,
   GridActionsCellItem,
-  GridEventListener,
   GridRowId,
   GridRowModel,
   GridRowEditStopReasons,
+  GridColumnGroup,
+  GridEventListener,
 } from "@mui/x-data-grid";
 import ArchiDropDownMenu from "@/components/base/ArchiDropDownMenu";
 
@@ -34,38 +35,74 @@ const initialRows: GridRowsProp = [
   {
     id: generateId(),
     project: "Project 1",
-    total: { total: 100, paid: 90, payable: 0, due: 10 },
-    basePrice: { total: 100, paid: 90, payable: 0, due: 10 },
-    extraWork: { total: 100, paid: 90, payable: 0, due: 10 },
-    inflation: { total: 100, paid: 90, payable: 0, due: 10 },
-    serviceCharges: { total: 100, paid: 90, payable: 0, due: 10 },
+    ttotal: 100,
+    tpaid: 90,
+    tpayable: 0,
+    tdue: 10,
+    bptotal: 100,
+    bppaid: 90,
+    bppayable: 0,
+    bpdue: 10,
+    ewtotal: 100,
+    ewpaid: 90,
+    ewpayable: 0,
+    ewdue: 10,
+    itotal: 100,
+    ipaid: 90,
+    ipayable: 0,
+    idue: 10,
+    sctotal: 100,
+    scpaid: 90,
+    scpayable: 0,
+    scdue: 10,
   },
   {
     id: generateId(),
     project: "Project 2",
-    total: { total: 100, paid: 90, payable: 0, due: 10 },
-    basePrice: { total: 100, paid: 90, payable: 0, due: 10 },
-    extraWork: { total: 100, paid: 90, payable: 0, due: 10 },
-    inflation: { total: 100, paid: 90, payable: 0, due: 10 },
-    serviceCharges: { total: 100, paid: 90, payable: 0, due: 10 },
+    ttotal: 100,
+    tpaid: 90,
+    tpayable: 0,
+    tdue: 10,
+    bptotal: 100,
+    bppaid: 90,
+    bppayable: 0,
+    bpdue: 10,
+    ewtotal: 100,
+    ewpaid: 90,
+    ewpayable: 0,
+    ewdue: 10,
+    itotal: 100,
+    ipaid: 90,
+    ipayable: 0,
+    idue: 10,
+    sctotal: 100,
+    scpaid: 90,
+    scpayable: 0,
+    scdue: 10,
   },
   {
     id: generateId(),
     project: "Project 3",
-    total: { total: 100, paid: 90, payable: 0, due: 10 },
-    basePrice: { total: 100, paid: 90, payable: 0, due: 10 },
-    extraWork: { total: 100, paid: 90, payable: 0, due: 10 },
-    inflation: { total: 100, paid: 90, payable: 0, due: 10 },
-    serviceCharges: { total: 100, paid: 90, payable: 0, due: 10 },
-  },
-  {
-    id: generateId(),
-    project: "Project 4",
-    total: { total: 100, paid: 90, payable: 0, due: 10 },
-    basePrice: { total: 100, paid: 90, payable: 0, due: 10 },
-    extraWork: { total: 100, paid: 90, payable: 0, due: 10 },
-    inflation: { total: 100, paid: 90, payable: 0, due: 10 },
-    serviceCharges: { total: 100, paid: 90, payable: 0, due: 10 },
+    ttotal: 100,
+    tpaid: 90,
+    tpayable: 0,
+    tdue: 10,
+    bptotal: 100,
+    bppaid: 90,
+    bppayable: 0,
+    bpdue: 10,
+    ewtotal: 100,
+    ewpaid: 90,
+    ewpayable: 0,
+    ewdue: 10,
+    itotal: 100,
+    ipaid: 90,
+    ipayable: 0,
+    idue: 10,
+    sctotal: 100,
+    scpaid: 90,
+    scpayable: 0,
+    scdue: 10,
   },
 ];
 
@@ -86,11 +123,26 @@ function EditToolbar(props: EditToolbarProps) {
       {
         id,
         project: "",
-        total: { total: 0, paid: 0, payable: 0, due: 0 },
-        basePrice: { total: 0, paid: 0, payable: 0, due: 0 },
-        extraWork: { total: 0, paid: 0, payable: 0, due: 0 },
-        inflation: { total: 0, paid: 0, payable: 0, due: 0 },
-        serviceCharges: { total: 0, paid: 0, payable: 0, due: 0 },
+        ttotal: 0,
+        tpaid: 0,
+        tpayable: 0,
+        tdue: 0,
+        bptotal: 0,
+        bppaid: 0,
+        bppayable: 0,
+        bpdue: 0,
+        ewtotal: 0,
+        ewpaid: 0,
+        ewpayable: 0,
+        ewdue: 0,
+        itotal: 0,
+        ipaid: 0,
+        ipayable: 0,
+        idue: 0,
+        sctotal: 0,
+        scpaid: 0,
+        scpayable: 0,
+        scdue: 0,
         isNew: true,
       },
     ]);
@@ -174,88 +226,160 @@ export default function TableComponent() {
     setRowModesModel(newRowModesModel);
   };
 
+  
+
   const columns: GridColDef[] = [
     { field: "id", headerName: "No.", width: 50 },
     { field: "project", headerName: "Project", width: 180, editable: true },
+    //  Total
     {
-      field: "total",
-      // headerName: "Total",
-      renderHeader: () => (
-        <div className="flex flex-col items-center">
-            <div className="text-sm font-bold">Total</div>
-          <div className="text-sm">Total / Paid / Payable / Due</div>
-        </div>
-      ),
-      width: 220,
-      cellClassName: "h-5",
-      valueGetter: (params) => {
-        const { total, paid, payable, due } = params.value;
-        return `${total} / ${paid} / ${payable} / ${due}`;
-      },
+      field: "ttotal",
+      headerName: "Total",
+      width: 62,
+
       editable: true,
     },
     {
-      field: "basePrice",
-      //headerName: "Base Price",
-      renderHeader: () => (
-        <div className="flex flex-col items-center">
-            <div className="text-sm font-bold">Base Price</div>
-          <div className="text-sm">Total / Paid / Payable / Due</div>
-        </div>
-      ),
-      width: 220,
-      valueGetter: (params) => {
-        const { total, paid, payable, due } = params.value;
-        return `${total} / ${paid} / ${payable} / ${due}`;
-      },
+      field: "tpaid",
+      headerName: "Paid",
+      width: 62,
+
       editable: true,
     },
     {
-      field: "extraWork",
-     // headerName: "Extra Work",
-      renderHeader: () => (
-        <div className="flex flex-col items-center">
-            <div className="text-sm font-bold">Extra Work</div>
-          <div className="text-sm">Total / Paid / Payable / Due</div>
-        </div>
-      ),
-      width: 220,
-      valueGetter: (params) => {
-        const { total, paid, payable, due } = params.value;
-        return `${total} / ${paid} / ${payable} / ${due}`;
-      },
+      field: "tpayable",
+      headerName: "Payable",
+      width: 62,
+
       editable: true,
     },
     {
-      field: "inflation",
-    //  headerName: "Inflation",
-      renderHeader: () => (
-        <div className="flex flex-col items-center">
-            <div className="text-sm font-bold">Inflation</div>
-          <div className="text-sm">Total / Paid / Payable / Due</div>
-        </div>
-      ),
-      width: 220,
-      valueGetter: (params) => {
-        const { total, paid, payable, due } = params.value;
-        return `${total} / ${paid} / ${payable} / ${due}`;
-      },
+      field: "tdue",
+      headerName: "Due",
+      width: 62,
+
+      editable: true,
+    },
+
+    // Base Price
+
+    {
+      field: "bptotal",
+      headerName: "Total",
+      width: 62,
+
       editable: true,
     },
     {
-      field: "serviceCharges",
-    //  headerName: "Service Charges",
-      renderHeader: () => (
-        <div className="flex flex-col justify-center items-center">
-            <div className="text-sm font-bold">Service Charges</div>
-          <div className="text-sm">Total / Paid / Payable / Due</div>
-        </div>
-      ),
-      width: 220,
-      valueGetter: (params) => {
-        const { total, paid, payable, due } = params.value;
-        return `${total} / ${paid} / ${payable} / ${due}`;
-      },
+      field: "bppaid",
+      headerName: "Paid",
+      width: 62,
+
+      editable: true,
+    },
+    {
+      field: "bppayable",
+      headerName: "Payable",
+      width: 62,
+
+      editable: true,
+    },
+    {
+      field: "bpdue",
+      headerName: "Due",
+      width: 62,
+
+      editable: true,
+    },
+
+    // Extra Work
+    {
+      field: "ewtotal",
+      headerName: "Total",
+      width: 62,
+
+      editable: true,
+    },
+    {
+      field: "ewpaid",
+      headerName: "Paid",
+      width: 62,
+
+      editable: true,
+    },
+    {
+      field: "ewpayable",
+      headerName: "Payable",
+      width: 62,
+
+      editable: true,
+    },
+    {
+      field: "ewdue",
+      headerName: "Due",
+      width: 62,
+
+      editable: true,
+    },
+
+    // Inflation
+    {
+      field: "itotal",
+      headerName: "Total",
+      width: 62,
+
+      editable: true,
+    },
+    {
+      field: "ipaid",
+      headerName: "Paid",
+      width: 62,
+
+      editable: true,
+    },
+    {
+      field: "ipayable",
+      headerName: "Payable",
+      width: 62,
+
+      editable: true,
+    },
+    {
+      field: "idue",
+      headerName: "Due",
+      width: 62,
+
+      editable: true,
+    },
+
+    // Service Charges
+
+    {
+      field: "sctotal",
+      headerName: "Total",
+      width: 62,
+
+      editable: true,
+    },
+    {
+      field: "scpaid",
+      headerName: "Paid",
+      width: 62,
+
+      editable: true,
+    },
+    {
+      field: "scpayable",
+      headerName: "Payable",
+      width: 62,
+
+      editable: true,
+    },
+    {
+      field: "scdue",
+      headerName: "Due",
+      width: 62,
+
       editable: true,
     },
 
@@ -311,10 +435,63 @@ export default function TableComponent() {
     },
   ];
 
+  const columnGroupingModel: GridColumnGroup[] = [
+    {
+      groupId: "total",
+      headerName: "Total",
+      children: [
+        { field: "ttotal" },
+        { field: "tpaid" },
+        { field: "tpayable" },
+        { field: "tdue" },
+      ],
+    },
+    {
+      groupId: "basePrice",
+      headerName: "Base Price",
+      children: [
+        { field: "bptotal" },
+        { field: "bppaid" },
+        { field: "bppayable" },
+        { field: "bpdue" },
+      ],
+    },
+    {
+      groupId: "extraWork",
+      headerName: "Extra Work",
+      children: [
+        { field: "ewtotal" },
+        { field: "ewpaid" },
+        { field: "ewpayable" },
+        { field: "ewdue" },
+      ],
+    },
+    {
+      groupId: "inflation",
+      headerName: "Inflation",
+      children: [
+        { field: "itotal" },
+        { field: "ipaid" },
+        { field: "ipayable" },
+        { field: "idue" },
+      ],
+    },
+    {
+      groupId: "serviceCharges",
+      headerName: "Service Charges",
+      children: [
+        { field: "sctotal" },
+        { field: "scpaid" },
+        { field: "scpayable" },
+        { field: "scdue" },
+      ],
+    },
+  ];
+
   return (
     <Box
       sx={{
-        height: 500,
+        height: "auto",
         backgroundColor: "white",
         borderRadius: 2,
         padding: 3,
@@ -327,26 +504,26 @@ export default function TableComponent() {
         },
       }}
     >
-     
-        <div className="bg-white shadow">
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            editMode="row"
-            rowModesModel={rowModesModel}
-            onRowModesModelChange={handleRowModesModelChange}
-            onRowEditStop={handleRowEditStop}
-            processRowUpdate={processRowUpdate}
-            rowHeight={60}
-            slots={{
-              toolbar: EditToolbar,
-            }}
-            slotProps={{
-              toolbar: { setRows, setRowModesModel },
-            }}
-          />
-        </div>
- 
+      <div className="bg-white shadow">
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          editMode="row"
+          rowModesModel={rowModesModel}
+          onRowModesModelChange={handleRowModesModelChange}
+          onRowEditStop={handleRowEditStop}
+          processRowUpdate={processRowUpdate}
+          rowHeight={60}
+          slots={{
+            toolbar: EditToolbar,
+          }}
+          slotProps={{
+            toolbar: { setRows, setRowModesModel },
+          }}
+          experimentalFeatures={{ columnGrouping: true }}
+          columnGroupingModel={columnGroupingModel}
+        />
+      </div>
     </Box>
   );
 }

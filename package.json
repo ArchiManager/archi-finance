@@ -17,6 +17,7 @@
     "@mui/material-nextjs": "^5.15.11",
     "@mui/x-data-grid": "^6.19.6",
     "@mui/x-data-grid-generator": "^6.19.6",
+    "@mui/x-data-grid-pro": "^6.19.6",
     "@reduxjs/toolkit": "^2.2.1",
     "@tailwindcss/typography": "^0.5.10",
     "firebase": "^10.6.0",

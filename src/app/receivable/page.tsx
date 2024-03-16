@@ -4,7 +4,7 @@ import ReceivableBody from './ReceivableBody'
 
 function Receivable() {
   return (
-    <div className='p-5'>
+    <div className='p-0'>
         
         <ReceivableHeader />
         <ReceivableBody/>
