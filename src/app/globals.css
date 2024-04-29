@@ -3,19 +3,17 @@
 @tailwind utilities;
 
 .media-scroller {
-    --_spacer: var(--size-3);
     display: grid;
     gap: var(--_spacer);
     grid-auto-flow: column;
-    grid-auto-columns: 21%;
+    grid-auto-columns: 30%;
 
     padding: 0 var(--_spacer) var(--_spacer);
 
     overflow-x: auto;
     overscroll-behavior-inline: contain;
-    border: 5px solid red;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 .media-element {
@@ -26,7 +24,6 @@
     background: var(--surface-2);
     border-radius: var(--radius-2);
     box-shadow: var(--shadow-2);
-    border: 2px solid blue;
 }
 
 .media-element>img {
