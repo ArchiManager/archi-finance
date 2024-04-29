@@ -1,10 +1,9 @@
 "use client";
 import * as React from "react";
-import Button from "@mui/material/Button";
-import { useRouter } from "next/navigation";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { signOut } from "firebase/auth";
 import { auth } from "@/firebase";
+import Button from "@mui/material/Button";
+import { useRouter } from "nextjs13-progress";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function Home() {
   const router = useRouter();
@@ -20,21 +19,6 @@ export default function Home() {
     }
   });
 
-  React.useEffect(() => {
-    if (!loadingAuth) {
-      if (user) {
-        // alert("User is already Signed In" + user.email);
-        // do something with the user
-        console.log("User ==> ", user);
-      } else {
-        console.log("user is null");
-        /*    router.push("/login"); */
-        // alert("User is not Signed In");
-        // if user is not logged in, redirect to login page
-      }
-    }
-  }, [user, loadingAuth, router]);
-
   return (
     <div className="flex flex-col justify-evenly h-screen">
       <h1 className="text-center text-6xl font-bold font-mono text-indigo-500">
@@ -44,7 +28,7 @@ export default function Home() {
         <Button
           variant="contained"
           className="bg-blue-700"
-          onClick={() => router.push("/login")}
+          onClick={() => router.push("/auth/login")}
         >
           Move to Login
         </Button>

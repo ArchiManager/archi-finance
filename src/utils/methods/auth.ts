@@ -1,9 +1,9 @@
 import { signOut } from "firebase/auth";
 import { auth } from "@/firebase";
 
-export const logout = (): boolean => {
+export const logout = async () => {
     if (window.confirm("Are you sure you want to logout?")) {
-        signOut(auth)
+        await signOut(auth)
             .then(() => {
                 // Sign-out successful.
                 return true;

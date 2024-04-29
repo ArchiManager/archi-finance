@@ -1,28 +1,26 @@
 "use client";
 import * as React from 'react';
-import { useEffect } from 'react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Badge, Menu, MenuItem } from "@mui/material";
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import MoreIcon from "@mui/icons-material/MoreVert";
-import SearchIcon from '@mui/icons-material/Search';
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from '@mui/icons-material/Mail';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from "@/firebase";
-import { useRouter } from 'next/navigation';
-import { useSnackbar } from 'notistack';
 import Image from 'next/image';
-import { drawerWidth } from '@/components/common/Sidebar/data';
-import { logout } from '@/utils/methods/auth';
-import ArchiInput from '@/components/base/ArchiInput';
 import NavLogo from './NavLogo';
+import { auth } from "@/firebase";
+import Box from '@mui/material/Box';
+import { useSnackbar } from 'notistack';
+import { signOut } from 'firebase/auth';
+import Toolbar from '@mui/material/Toolbar';
+import { useRouter } from 'nextjs13-progress';
+import { styled } from '@mui/material/styles';
+import MailIcon from '@mui/icons-material/Mail';
+import MenuIcon from '@mui/icons-material/Menu';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
+import MoreIcon from "@mui/icons-material/MoreVert";
+import ArchiInput from '@/components/base/ArchiInput';
+import { Badge, Menu, MenuItem } from "@mui/material";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import { drawerWidth } from '@/components/common/Sidebar/data';
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 
 interface NavbarProps {
     open: boolean;
@@ -68,34 +66,6 @@ const Navbar = (props: NavbarProps) => {
     // For Loading
     const [user, loadingAuth, errorAuth] = useAuthState(auth);
 
-    useEffect(() => {
-        if (!loadingAuth) {
-            if (user) {
-                // alert("User is already Signed In" + user.email);
-                // do something with the user
-                console.log("User @ Admin ==> ", user);
-            } else {
-                console.log("user is null");
-
-                enqueueSnackbar("You are not logged in. Please login to continue", {
-                    variant: "error",
-                    anchorOrigin: {
-                        vertical: "top",
-                        horizontal: "center",
-                    },
-                    autoHideDuration: 3000,
-                });
-
-                setTimeout(() => {
-                    router.push("/login");
-                }, 3000);
-                // alert("User is not Signed In");
-                // if user is not logged in, redirect to login page
-            }
-            // if user is null, redirect to login page
-        }
-    }, [user, loadingAuth, router]);
-
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -117,25 +87,27 @@ const Navbar = (props: NavbarProps) => {
     };
 
     // For Logout
-    const handleLogout = () => {
-        const isLoggedOut: boolean = logout();
+    const handleLogout = async () => {
+        try {
+            await signOut(auth);
 
-        if (isLoggedOut) {
-            enqueueSnackbar("Logout Successful", {
+            enqueueSnackbar("You have been logged out successfully", {
                 variant: "success",
                 anchorOrigin: {
                     vertical: "top",
                     horizontal: "right",
                 },
             });
-        } else {
-            enqueueSnackbar("Logout Failed", {
+        } catch (error) {
+            enqueueSnackbar("An error occurred while logging out", {
                 variant: "error",
                 anchorOrigin: {
                     vertical: "top",
                     horizontal: "right",
                 },
             });
+
+            console.error(error);
         }
     }
 
