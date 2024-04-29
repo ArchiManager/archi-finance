@@ -54,7 +54,7 @@ function ArchiInput(props: InputProps) {
     maxLength,
     value,
     onChange,
-    step = 1,
+    step,
   } = props;
 
   const [inputValue, setInputValue] = useState<string>(value?.toString() || '');
@@ -66,9 +66,9 @@ function ArchiInput(props: InputProps) {
   };
 
   return (
-    <div className={`${step && className}`}>
+    <div>
       {(!step) ? (
-        <div className={className}>
+        <div className="mt-2">
           {label && (
             <div className="w-full ml-0 p-0">
               <InputLabel htmlFor={id} className='text-gray-900 text-lg my-0 font-bold'>{label}</InputLabel>

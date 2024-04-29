@@ -1,38 +1,17 @@
 "use client";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { Button, TextField } from "@mui/material";
-import { auth } from "@/firebase";
 import {
     GoogleAuthProvider,
     signInWithEmailAndPassword,
     signInWithPopup,
 } from "firebase/auth";
-import { useRouter } from "next/navigation";
-import { useAuthState } from "react-firebase-hooks/auth";
+import Image from "next/image";
+import { auth } from "@/firebase";
+import { useEffect, useState } from "react";
+import { Button, TextField } from "@mui/material";
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const [user, loading, error] = useAuthState(auth);
-
-    const router = useRouter();
-
-    useEffect(() => {
-        if (!loading) {
-            if (user) {
-                // alert("User is already Signed In" + user.email);
-                // do something with the user
-                router.push("/dashboard");
-            } else {
-                console.log("user is null");
-                // alert("User is not Signed In");
-                // if user is not logged in, redirect to login page
-            }
-            // if user is null, redirect to login page
-        }
-    }, [user, loading, router]);
 
     const handleSubmit = (event: any) => {
         event.preventDefault();

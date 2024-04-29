@@ -1,6 +1,8 @@
-import "./globals.css";
 import type { Metadata } from "next";
 import MainLayout from "@/layouts/MainLayout";
+import AuthMiddleware from "@/middleware/AuthMiddleware";
+import TopNavigationLoader from "@/components/common/TopNavigationLoader";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "ArchiFinance",
@@ -21,8 +23,12 @@ export default function RootLayout({
       </head>
       <body>
         <MainLayout>
-          <>{children}</>
+          <AuthMiddleware>
+            {children}
+          </AuthMiddleware>
         </MainLayout>
+
+        <TopNavigationLoader />
       </body>
     </html>
   );

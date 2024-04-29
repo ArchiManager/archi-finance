@@ -2,7 +2,7 @@
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { sidebarItems } from "@/components/common/Sidebar/data";
 import { AddCircleOutline } from "@mui/icons-material";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs13-progress";
 
 interface SidebarProps {
     open: boolean;
@@ -43,7 +43,9 @@ const Sidebar = ({
             </List>
             <List>
                 {sidebarItems.map((item) => (
-                    <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+                    <ListItem key={item.text} disablePadding sx={{ display: 'block' }}
+                        onClick={() => { router.push(item.link) }}
+                    >
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
